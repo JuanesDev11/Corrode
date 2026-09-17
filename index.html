@@ -5,7 +5,7 @@
         <title>
             CORRODE
         </title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     
     <body>
@@ -13,7 +13,7 @@
             <h1>Apuesta seguro</h1>
             <div class="nav-bar">
                 <a href="/">
-                    <img src="logo-corrode.png" alt="correde logo" class="site-logo">
+                    <img src="assets/logo-corrode.png" alt="correde logo" class="site-logo">
                 </a>
             </div>
         </header>
@@ -28,8 +28,24 @@
             <section>
                 <h2>Encuentra tus jugadores favoritos</h2>
             </section>
+            <section class="caja-imc">
+                <h2>IMC</h2>
+                
+                <label for="estatura">Estatura (en metros):</label>
+                <input type="number" id="estatura" step="0.01" placeholder="Ej. 1.75">
+                <br><br>
+
+                <label for="peso">Peso (en kg):</label>
+                <input type="number" id="peso" step="0.1" placeholder="Ej. 70">
+                <br><br>
+
+                <button onclick="imc()">Calcular</button>
+
+                <p id="Resultado">Resultado: </p>
+            </section>
         </main>
         <footer>Esta pagina esta regulada por Coljuegos</footer>
-        <script src="script.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/masaCorporal.js"></script>
     </body>
 </html>
