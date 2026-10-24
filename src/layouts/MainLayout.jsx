@@ -17,7 +17,6 @@ export default function MainLayout() {
       <Menu cerrado={cerrado} setCerrado={setCerrado}/>
         <div className={`flex flex-col bg-[#00315c] fixed top-2 right-2 h-[calc(100vh-1rem)] p-4 shadow-xl z-10 rounded-2xl ${!cerrado?'left-64':'left-20'} transition-all duration-300 overflow-y-auto`}>
           <Header />
-          <Navbar />
             <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6">
               <Outlet />
           </main>

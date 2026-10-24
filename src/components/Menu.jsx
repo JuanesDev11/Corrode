@@ -1,11 +1,20 @@
 import { 
     GalleryHorizontalEnd, BellRing, ChevronDown, CircleUser,
     TextAlignJustifyEnd, House,Star, SportShoe, RotateCwFadingClock,
-    LogIn
+    LogIn, ChevronUp
 } from 'lucide-react';
 import logo from '../assets/logo-corrode.png';
+import {useState} from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Menu({cerrado,setCerrado }){
+    const[deportes,setDeportes]=useState(false);
+    const enlaces = [
+    { to: '/', label: 'Inicio', end: true },
+    { to: '/futbol', label: 'Fútbol' },
+    { to: '/caballos', label: 'Caballos' },
+    ];
+
     return (
         <div className={`fixed top-2 left-2 h-[calc(100vh-1rem)] flex flex-col bg-[#0b3a6e] p-4 text-[#BBD7FD] shadow-xl z-50 rounded-2xl ${cerrado?'w-14':'w-60'} transition-all duration-300`}>
             
@@ -44,10 +53,13 @@ function Menu({cerrado,setCerrado }){
 
             {/*Inicio*/}
             <div className={`flex-1 text-sm mt-6 ${cerrado?'ml-1 space-y-6':'ml-6 space-y-4'}`}>
+                
+                <NavLink to="/" end={true}>
                 <div className="flex items-center hover:text-[#00132B] transition-all duration-300">
                     <House className="mr-2 top-1 cursor-pointer" size={16}/>
                     {!cerrado&&(<span>Inicio</span>)}
                 </div>
+                </NavLink>
 
                 <div className="flex items-center justify-between hover:text-[#00132B] transition-all duration-300">
                     <div className="flex items-center">
@@ -56,14 +68,41 @@ function Menu({cerrado,setCerrado }){
                     </div>
                     {!cerrado&&(<ChevronDown className="cursor-pointer" size={16}/>)}
                 </div>
-
-                <div className="flex items-center justify-between hover:text-[#00132B] transition-all duration-300">
+                
+                <div className={`flex items-center justify-between hover:text-[#00132B] transition-all duration-300 ${!deportes?'text-[#00132B]':''}`}>
                     <div className="flex items-center">
                         <SportShoe className="mr-2 top-1 cursor-pointer" size={16}/>
                         {!cerrado&&(<span>Deportes</span>)}
                     </div>
-                    {!cerrado&&(<ChevronDown className="cursor-pointer" size={16}/>)}
+                    {!cerrado&&(
+                        deportes?(
+                            <ChevronDown 
+                            onClick={()=>setDeportes(!deportes)}
+                            className="cursor-pointer" size={16}/>
+                        ):(
+                            <ChevronUp 
+                            onClick={()=>setDeportes(!deportes)}
+                            className="cursor-pointer" size={16}/>
+                        ))}
                 </div>
+                {!cerrado && !deportes && (
+                    <ul className="flex flex-col ml-6 space-y-4 border-l-2 border-[#BBD7FD] pl-4">
+                        {enlaces
+                            .filter(enlace => enlace.label === 'Fútbol' || enlace.label === 'Caballos')
+                            .map(({ to, label, end }) => (
+                            <li key={to}>
+                                <NavLink to={to} end={end}
+                                className={({ isActive }) =>
+                                `block transition-colors hover:text-[#00132B] ${
+                                isActive ? 'text-[#00132B] bg-white font-semibold p-2 shadow-xl rounded-md' : 'text-[#BBD7FD]'
+                                }`}>
+                                    {label}
+                                </NavLink>
+                            </li>
+                            ))
+                        }
+                    </ul>
+                )}
 
                 <div className="flex items-center justify-between hover:text-[#00132B] transition-all duration-300">
                     <div className="flex items-center">
