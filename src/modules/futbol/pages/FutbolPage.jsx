@@ -1,5 +1,4 @@
 import { PARTIDOS } from '../data/partidos';
-import Menu from '../../../components/Menu';
 
 export default function FutbolPage() {
   return (

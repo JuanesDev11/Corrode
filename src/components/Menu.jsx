@@ -56,7 +56,9 @@ function Menu({cerrado,setCerrado }){
                 
                 <NavLink to="/" end={true}>
                 <div className="flex items-center hover:text-[#00132B] transition-all duration-300">
-                    <House className="mr-2 top-1 cursor-pointer" size={16}/>
+                    <House
+                    onClick={()=>setDeportes(!false)}
+                    className="mr-2 top-1 cursor-pointer" size={16}/>
                     {!cerrado&&(<span>Inicio</span>)}
                 </div>
                 </NavLink>
@@ -69,9 +71,16 @@ function Menu({cerrado,setCerrado }){
                     {!cerrado&&(<ChevronDown className="cursor-pointer" size={16}/>)}
                 </div>
                 
-                <div className={`flex items-center justify-between hover:text-[#00132B] transition-all duration-300 ${!deportes?'text-[#00132B]':''}`}>
+                <div className={`flex items-center justify-between hover:text-[#00132B] transition-all duration-300 ${!cerrado &&!deportes?'text-[#00132B]':''}`}>
                     <div className="flex items-center">
-                        <SportShoe className="mr-2 top-1 cursor-pointer" size={16}/>
+                        <SportShoe 
+                        onClick={()=>{
+                            if(cerrado){
+                                setCerrado(!cerrado);
+                            }
+                        }
+                        }
+                        className="mr-2 top-1 cursor-pointer" size={16}/>
                         {!cerrado&&(<span>Deportes</span>)}
                     </div>
                     {!cerrado&&(
@@ -86,15 +95,15 @@ function Menu({cerrado,setCerrado }){
                         ))}
                 </div>
                 {!cerrado && !deportes && (
-                    <ul className="flex flex-col ml-6 space-y-4 border-l-2 border-[#BBD7FD] pl-4">
+                    <ul className="flex flex-col ml-6 space-y-4 border-l-2 border-[#BBD7FD]/20 pl-4 transition-all duration-300">
                         {enlaces
                             .filter(enlace => enlace.label === 'Fútbol' || enlace.label === 'Caballos')
                             .map(({ to, label, end }) => (
                             <li key={to}>
                                 <NavLink to={to} end={end}
                                 className={({ isActive }) =>
-                                `block transition-colors hover:text-[#00132B] ${
-                                isActive ? 'text-[#00132B] bg-white font-semibold p-2 shadow-xl rounded-md' : 'text-[#BBD7FD]'
+                                `block hover:text-[#00132B] ${
+                                isActive ? 'text-[#00132B] bg-[#FFFFFF]/80 font-semibold p-2 shadow-xl rounded-md' : 'text-[#BBD7FD]'
                                 }`}>
                                     {label}
                                 </NavLink>
@@ -115,11 +124,7 @@ function Menu({cerrado,setCerrado }){
 
             {/*Login*/}
             <div className={`pb-2 text-sm ${cerrado?'ml-1':'ml-6'}`}>
-                <div className={`flex items-center ${cerrado?'justify-start':'justify-between'}`}>
-                    {!cerrado&&(<div className="flex items-center">
-                        <CircleUser className="mr-2 top-1 cursor-pointer" size={16} />
-                        <span>name</span>
-                    </div>)}
+                <div className={`flex items-center ${cerrado?'justify-start':'justify-end'}`}>
                     <LogIn className="cursor-pointer hover:text-[#00132B] transition-all duration-300" size={16}/>
                 </div>
             </div>
