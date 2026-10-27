@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Menu from '../components/Menu';
 import {useState} from "react";
+import LogicaBusqueda from '../global/LogicaBusqueda';
 
 export default function MainLayout() {
   const[cerrado,setCerrado]=useState(false);
@@ -12,15 +13,17 @@ export default function MainLayout() {
     041321
     051A2E
     082E52*/
+    <LogicaBusqueda>
     <div className="bg-[#082E52] min-h-screen">
       <Menu cerrado={cerrado} setCerrado={setCerrado}/>
         <div className={`flex flex-col bg-[#00315c] fixed top-2 right-2 h-[calc(100vh-1rem)] shadow-xl z-10 rounded-2xl ${!cerrado?'left-64':'left-20'} transition-all duration-300 overflow-y-auto`}>
           <Header />
-            <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6">
+            <main className="w-full flex-1 py-6 px-10 overflow-x-hidden">
               <Outlet />
           </main>
           <Footer />
       </div>
     </div>
+    </LogicaBusqueda>
   );
 }

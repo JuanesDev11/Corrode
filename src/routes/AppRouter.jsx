@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import InicioPage from '../modules/inicio/pages/InicioPage';
 import FutbolHomePage from '../modules/futbol/pages/FutbolHomePage';
+import EquipoPage from '../modules/futbol/pages/EquipoPage';
 import CaballosPage from '../modules/caballos/pages/CaballosPage';
 
 export default function AppRouter() {
@@ -11,6 +12,7 @@ export default function AppRouter() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<InicioPage />} />
           <Route path="/futbol" element={<FutbolHomePage />} />
+          <Route path="/futbol/equipo" element={<EquipoPage />}/>
           <Route path="/caballos" element={<CaballosPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

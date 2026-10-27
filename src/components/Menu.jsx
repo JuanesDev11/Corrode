@@ -11,7 +11,7 @@ function Menu({cerrado,setCerrado }){
     const[deportes,setDeportes]=useState(false);
     const enlaces = [
     { to: '/', label: 'Inicio', end: true },
-    { to: '/futbol', label: 'Fútbol' },
+    { to: '/futbol', label: 'Fútbol', end: true},
     { to: '/caballos', label: 'Caballos' },
     ];
 
@@ -57,7 +57,7 @@ function Menu({cerrado,setCerrado }){
                 <NavLink to="/" end={true}>
                 <div className="flex items-center hover:text-[#00132B] transition-all duration-300">
                     <House
-                    onClick={()=>setDeportes(!false)}
+                    onClick={()=>setDeportes(false)}
                     className="mr-2 top-1 cursor-pointer" size={16}/>
                     {!cerrado&&(<span>Inicio</span>)}
                 </div>
@@ -71,7 +71,7 @@ function Menu({cerrado,setCerrado }){
                     {!cerrado&&(<ChevronDown className="cursor-pointer" size={16}/>)}
                 </div>
                 
-                <div className={`flex items-center justify-between hover:text-[#00132B] transition-all duration-300 ${!cerrado &&!deportes?'text-[#00132B]':''}`}>
+                <div className={`flex items-center justify-between hover:text-[#00132B] transition-all duration-300 ${!cerrado &&deportes?'text-[#00132B]':''}`}>
                     <div className="flex items-center">
                         <SportShoe 
                         onClick={()=>{
@@ -84,7 +84,7 @@ function Menu({cerrado,setCerrado }){
                         {!cerrado&&(<span>Deportes</span>)}
                     </div>
                     {!cerrado&&(
-                        deportes?(
+                        !deportes?(
                             <ChevronDown 
                             onClick={()=>setDeportes(!deportes)}
                             className="cursor-pointer" size={16}/>
@@ -94,7 +94,7 @@ function Menu({cerrado,setCerrado }){
                             className="cursor-pointer" size={16}/>
                         ))}
                 </div>
-                {!cerrado && !deportes && (
+                {!cerrado && deportes && (
                     <ul className="flex flex-col ml-6 space-y-4 border-l-2 border-[#BBD7FD]/20 pl-4 transition-all duration-300">
                         {enlaces
                             .filter(enlace => enlace.label === 'Fútbol' || enlace.label === 'Caballos')
