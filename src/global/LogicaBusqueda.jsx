@@ -4,9 +4,8 @@ const busquedaGlobal=createContext();
 
 export default function LogicaBusqueda({children}) {
     const[escritoUser,setEscritoUser]=useState("");
-    const[equipoOn,setEquipoOn]=useState("");
     return(
-        <busquedaGlobal.Provider value={{escritoUser,setEscritoUser, equipoOn, setEquipoOn}}>
+        <busquedaGlobal.Provider value={{escritoUser,setEscritoUser}}>
             {children}
         </busquedaGlobal.Provider>
     );

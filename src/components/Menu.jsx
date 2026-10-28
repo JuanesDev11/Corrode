@@ -9,10 +9,16 @@ import { NavLink } from 'react-router-dom';
 
 function Menu({cerrado,setCerrado }){
     const[deportes,setDeportes]=useState(false);
+    const[hoy,setHoy]=useState(false);
     const enlaces = [
     { to: '/', label: 'Inicio', end: true },
     { to: '/futbol', label: 'Fútbol', end: true},
     { to: '/caballos', label: 'Caballos' },
+    { to: '/tejo', label: 'Tejo'},
+    { to: '/baloncesto', label: 'Baloncesto'},
+    { to: '/formula 1', label: 'Formula 1'},
+    { to: '/ciclismo', label: 'Ciclismo'},
+    { to: '/partidosHoy', label: 'Partidos'}
     ];
 
     return (
@@ -57,7 +63,10 @@ function Menu({cerrado,setCerrado }){
                 <NavLink to="/" end={true}>
                 <div className="flex items-center hover:text-[#00132B] transition-all duration-300">
                     <House
-                    onClick={()=>setDeportes(false)}
+                    onClick={()=>{
+                        setDeportes(false),
+                        setHoy(false)}
+                    }
                     className="mr-2 top-1 cursor-pointer" size={16}/>
                     {!cerrado&&(<span>Inicio</span>)}
                 </div>
@@ -77,6 +86,7 @@ function Menu({cerrado,setCerrado }){
                         onClick={()=>{
                             if(cerrado){
                                 setCerrado(!cerrado);
+                                setDeportes(true)
                             }
                         }
                         }
@@ -97,7 +107,11 @@ function Menu({cerrado,setCerrado }){
                 {!cerrado && deportes && (
                     <ul className="flex flex-col ml-6 space-y-4 border-l-2 border-[#BBD7FD]/20 pl-4 transition-all duration-300">
                         {enlaces
-                            .filter(enlace => enlace.label === 'Fútbol' || enlace.label === 'Caballos')
+                            .filter(enlace => enlace.label === 
+                                'Fútbol' || enlace.label === 'Caballos'||
+                                enlace.label==='Tejo' || enlace.label==='Baloncesto' ||
+                                enlace.label==='Formula 1' || enlace.label==='Ciclismo'
+                            )
                             .map(({ to, label, end }) => (
                             <li key={to}>
                                 <NavLink to={to} end={end}
@@ -113,13 +127,47 @@ function Menu({cerrado,setCerrado }){
                     </ul>
                 )}
 
-                <div className="flex items-center justify-between hover:text-[#00132B] transition-all duration-300">
+                <div className={`flex items-center justify-between hover:text-[#00132B] transition-all duration-300 ${!cerrado &&hoy?'text-[#00132B]':''}`}>
                     <div className="flex items-center">
-                        <RotateCwFadingClock className="mr-2 top-1 cursor-pointer" size={16}/>
+                        <RotateCwFadingClock className="mr-2 top-1 cursor-pointer" size={16}
+                        onClick={()=>{
+                            if(cerrado){
+                                setCerrado(!cerrado);
+                                setHoy(true)
+                            }
+                        }
+                        }/>
                         {!cerrado&&(<span>Hoy</span>)}
                     </div>
-                    {!cerrado&&(<ChevronDown className="cursor-pointer" size={16}/>)}
+                    {!cerrado&&(
+                        !hoy?(
+                            <ChevronDown 
+                            onClick={()=>setHoy(!hoy)}
+                            className="cursor-pointer" size={16}/>
+                        ):(
+                            <ChevronUp 
+                            onClick={()=>setHoy(!hoy)}
+                            className="cursor-pointer" size={16}/>
+                    ))}
                 </div>
+                {!cerrado && hoy && (
+                    <ul className="flex flex-col ml-6 space-y-4 border-l-2 border-[#BBD7FD]/20 pl-4 transition-all duration-300">
+                        {enlaces
+                            .filter(enlace => enlace.label === 'Partidos')
+                            .map(({ to, label, end }) => (
+                            <li key={to}>
+                                <NavLink to={to} end={end}
+                                className={({ isActive }) =>
+                                `block hover:text-[#00132B] ${
+                                isActive ? 'text-[#00132B] bg-[#FFFFFF]/80 font-semibold p-2 shadow-xl rounded-md' : 'text-[#BBD7FD]'
+                                }`}>
+                                    {label}
+                                </NavLink>
+                            </li>
+                            ))
+                        }
+                    </ul>
+                )}
             </div>
 
             {/*Login*/}

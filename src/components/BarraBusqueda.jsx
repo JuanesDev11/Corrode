@@ -5,15 +5,18 @@ import {Buscar} from '../global/LogicaBusqueda';
 export default function BarraBusqueda() {
   const page = useLocation();
   const {escritoUser,setEscritoUser}=Buscar();
+  const rutaEquipo = page.pathname.startsWith('/futbol/') && page.pathname !== '/futbol';
   const getPagina = () => {
     //Futbol
+    if (rutaEquipo) return "Buscar jugador...";
     if (page.pathname.includes('/futbol')) return "Buscar equipos...";
-    if (page.pathname.includes('/futbol/equipo')) return "Buscar jugador...";
     //Caballos
     if (page.pathname.includes('/caballos')) return "Buscar caballos...";
+    //Hoy
+    if (page.pathname.includes('/partidosHoy')) return "Buscar eventos en línea...";
     return "Buscar...";
   };
-
+  
   return (
     <div className="flex justify-start items-center p-2 w-full max-w-lg bg-[#0b3a6e] placeholder:text-slate-500">
         <input 

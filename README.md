@@ -28,3 +28,5 @@ src/
       components/             # Pista, ListaCaballos, PanelApuesta, Resultado, HistorialApuestas
       pages/CaballosPage.jsx
 ```
+#### Nota
+Este repositorio forma parte de un proyecto académico sin fines de lucro para la universidad. Todos los logotipos, marcas y derechos de imagen pertenecen a sus respectivos propietarios y se utilizan exclusivamente con fines educativos.
